@@ -496,7 +496,8 @@ async function imFeelingUnlucky() {
           <div class="search-result-item ${
             Math.random() < 0.8 ? "silly-effect" : ""
           } extra-unlucky">
-            <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+            <div class="result-overlay" onclick="showUnclickableMessage()"></div>
+            <a href="javascript:void(0);" onclick="return false;">
               ${item.title}
             </a>
             <div class="result-url">${item.link}</div>
@@ -799,3 +800,36 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 });
+
+// Add this function to handle unclickable messages
+function showUnclickableMessage() {
+  const messages = [
+    "Nice try! These links are on vacation.",
+    "Error 418: Links are too lazy to work today.",
+    "Sorry, our links are practicing social distancing.",
+    "These links have achieved enlightenment and no longer serve mortals.",
+    "Links machine broke. Have a nice day!",
+    "The links are currently in a parallel universe.",
+    "Our links are busy contemplating the meaning of life.",
+    "Links have gone fishing. Try again never.",
+    "The links unionized and are on permanent strike.",
+    "These links identify as decorative elements.",
+  ];
+
+  const message = messages[Math.floor(Math.random() * messages.length)];
+  
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'unclickable-message';
+  messageDiv.innerHTML = `
+    <p>${message}</p>
+    <button onclick="this.parentElement.remove()">Accept Defeat</button>
+  `;
+  
+  document.body.appendChild(messageDiv);
+  
+  // Remove the message after 3 seconds
+  setTimeout(() => {
+    messageDiv.style.animation = 'popIn 0.5s ease-out reverse';
+    setTimeout(() => messageDiv.remove(), 500);
+  }, 3000);
+}
