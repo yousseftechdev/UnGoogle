@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UnGoogle - The Unhelpful Search Engine</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo">
+        <h1>Un<span>Google</span></h1>
+        <p class="tagline">The Unhelpful Search Engine™</p>
+      </div>
+
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search for something (we won't help anyway)"
+          autocomplete="off"
+        />
+        <div id="autocomplete-box" class="autocomplete-box"></div>
+        <button onclick="search()">Search</button>
+        <button onclick="imFeelingUnlucky()" class="feeling-unlucky">
+          I'm Feeling Unlucky
+        </button>
+      </div>
+
+      <div id="loading" class="loading hidden">
+        <p>Searching for unhelpful results...</p>
+        <div class="spinner"></div>
+      </div>
+
+      <div id="results" class="results hidden">
+        <div class="standard-response">
+          <p>Have you tried turning it off and on again?</p>
+        </div>
+        <div id="search-results"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
