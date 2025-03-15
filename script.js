@@ -242,7 +242,7 @@ async function search() {
           <div class="search-result-item ${
             Math.random() < 0.2 ? "silly-effect" : ""
           }">
-            <a href="${item.link}" target="_blank" rel="noopener noreferrer">
+            <a href="#" target="_blank" rel="noopener noreferrer">
               ${item.title}
             </a>
             <div class="result-url">${item.link}</div>
@@ -313,22 +313,19 @@ function initializeRunawayResults(extraChaos = false) {
     let hasEscaped = false;
 
     result.addEventListener("mouseover", function (e) {
-      if (hasEscaped) return; 
+      if (hasEscaped) return;
 
       if (Math.random() < (extraChaos ? 0.95 : 0.8)) {
         const resultRect = result.getBoundingClientRect();
         const mouseX = e.clientX;
         const mouseY = e.clientY;
 
-
         let escapeX, escapeY;
-
 
         const distanceToLeft = mouseX;
         const distanceToRight = viewportWidth - mouseX;
         const distanceToTop = mouseY;
         const distanceToBottom = viewportHeight - mouseY;
-
 
         const maxDistance = Math.max(
           distanceToLeft,
@@ -336,7 +333,6 @@ function initializeRunawayResults(extraChaos = false) {
           distanceToTop,
           distanceToBottom
         );
-
 
         if (maxDistance === distanceToLeft) {
           escapeX = -viewportWidth;
@@ -352,10 +348,8 @@ function initializeRunawayResults(extraChaos = false) {
           escapeY = viewportHeight * 2;
         }
 
-
         escapeX += (Math.random() - 0.5) * 200;
         escapeY += (Math.random() - 0.5) * 200;
-
 
         result.style.transition = `transform ${
           extraChaos ? 0.8 : 1.2
@@ -364,12 +358,10 @@ function initializeRunawayResults(extraChaos = false) {
           (Math.random() - 0.5) * 720
         }deg) scale(0.1)`;
 
-
         result.style.filter = "blur(5px)";
         result.style.opacity = "0.7";
 
         hasEscaped = true;
-
 
         setTimeout(
           () => {
@@ -377,7 +369,6 @@ function initializeRunawayResults(extraChaos = false) {
           },
           extraChaos ? 800 : 1200
         );
-
 
         if (
           document.querySelectorAll(
@@ -525,15 +516,12 @@ async function imFeelingUnlucky() {
 
     document.getElementById("search-results").innerHTML = resultsHtml;
 
-
     document.querySelectorAll(".extra-unlucky").forEach((result) => {
       result.style.transform = `rotate(${(Math.random() - 0.5) * 3}deg)`;
       if (Math.random() < 0.3) {
-
         result.style.fontFamily = "Comic Sans MS, cursive";
       }
     });
-
 
     setTimeout(() => {
       initializeRunawayResults(true);
@@ -605,7 +593,6 @@ function initializeFakeAds() {
     },
   ];
 
-
   const shuffledAds = [...fakeAds].sort(() => Math.random() - 0.5);
   const leftAds = shuffledAds.slice(0, 4);
   const rightAds = shuffledAds.slice(4);
@@ -652,7 +639,6 @@ function refreshAds() {
   initializeFakeAds();
 }
 
-
 function createPopupAd() {
   const popupAds = [
     {
@@ -686,7 +672,6 @@ function createPopupAd() {
   const popup = document.createElement("div");
   popup.className = "popup-ad";
 
-
   const maxX = window.innerWidth - 300;
   const maxY = window.innerHeight - 200;
   const randomX = Math.random() * maxX;
@@ -703,7 +688,6 @@ function createPopupAd() {
     <div class="fake-ad-content">${randomAd.content}</div>
     <div class="fake-ad-button">${randomAd.button}</div>
   `;
-
 
   let isDragging = false;
   let currentX;
@@ -736,12 +720,10 @@ function createPopupAd() {
     popup.style.cursor = "grab";
   });
 
-
   popup.querySelector(".popup-ad-close").addEventListener("click", () => {
     popup.style.animation = "popIn 0.5s ease-out reverse";
     setTimeout(() => popup.remove(), 500);
   });
-
 
   popup.querySelector(".fake-ad-button").addEventListener("click", () => {
     const responses = [
@@ -817,19 +799,19 @@ function showUnclickableMessage() {
   ];
 
   const message = messages[Math.floor(Math.random() * messages.length)];
-  
-  const messageDiv = document.createElement('div');
-  messageDiv.className = 'unclickable-message';
+
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "unclickable-message";
   messageDiv.innerHTML = `
     <p>${message}</p>
     <button onclick="this.parentElement.remove()">Accept Defeat</button>
   `;
-  
+
   document.body.appendChild(messageDiv);
-  
+
   // Remove the message after 3 seconds
   setTimeout(() => {
-    messageDiv.style.animation = 'popIn 0.5s ease-out reverse';
+    messageDiv.style.animation = "popIn 0.5s ease-out reverse";
     setTimeout(() => messageDiv.remove(), 500);
   }, 3000);
 }
